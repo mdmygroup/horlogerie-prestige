@@ -65,6 +65,16 @@
             height: 100%;
             width: 50%;
             overflow: hidden;
+            pointer-events: none; /* Optional: prevent accidental dragging issues */
+        }
+        .resize img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;       /* Ensures same width as the original image */
+            height: 100%;      /* Optional: maintains alignment if height varies */
+            object-fit: cover; /* Keeps proportions consistent */
+            object-position: left; /* ✅ Ensures image aligns from the left edge */
         }
         .handle {
             position: absolute;
