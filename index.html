@@ -846,6 +846,26 @@
                     isDragging = false;
                     document.body.style.cursor = '';
                 });
+
+                handle.addEventListener('touchstart', function(e) {
+                    isDragging = true;
+                    e.preventDefault();
+                });
+
+                document.addEventListener('touchmove', function(e) {
+                    if (!isDragging) return;
+                    const touch = e.touches[0];
+                    const sliderRect = slider.getBoundingClientRect();
+                    let newWidth = (touch.clientX - sliderRect.left) / sliderRect.width * 100;
+                    newWidth = Math.max(0, Math.min(newWidth, 100));
+                    before.style.width = newWidth + '%';
+                    handle.style.left = newWidth + '%';
+                });
+
+                document.addEventListener('touchend', function() {
+                    isDragging = false;
+                });
+                
             }
         });
 
