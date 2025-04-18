@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horlogerie Prestige | Vente et Réparation de Montres de Luxe</title>
+    <meta name="description" content="Horlogerie Prestige - Spécialiste en vente, réparation et restauration de montres de luxe à Paris. Service expert pour Rolex, Omega, Cartier et plus.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        /* Custom font classes */
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        .font-raleway {
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Hero section background with overlay */
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1523170335258-f5ed118494a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        /* Watch card hover effect */
+        .watch-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .watch-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Before/After slider */
+        .ba-slider {
+            position: relative;
+            overflow: hidden;
+        }
+        .ba-slider img {
+            width: 100%;
+            display: block;
+        }
+        .resize {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            overflow: hidden;
+        }
+        .handle {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            margin-left: -2px;
+            background: rgba(255, 255, 255, 0.7);
+            cursor: ew-resize;
+        }
+        .handle:after {
+            content: "⯈";
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            margin-top: -15px;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+        }
+        
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+        .slide-up {
+            transform: translateY(30px);
+        }
+        .slide-up.visible {
+            transform: translateY(0);
+        }
+        
+        /* Accordion animation */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="font-raleway text-gray-700 bg-gray-50">
+    <!-- Sticky Header with Navigation -->
+    <header class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <i class="fas fa-clock text-2xl text-amber-600 mr-2"></i>
+                <span class="font-playfair text-xl font-bold">HORLOGERIE PRESTIGE</span>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-amber-600 transition">Accueil</a>
+                <a href="#about" class="hover:text-amber-600 transition">À Propos</a>
+                <a href="#services" class="hover:text-amber-600 transition">Services</a>
+                <a href="#watches" class="hover:text-amber-600 transition">Montres</a>
+                <a href="#contact" class="hover:text-amber-600 transition">Contact</a>
+            </nav>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 px-6 shadow-lg">
+            <a href="#home" class="block py-2 hover:text-amber-600 transition">Accueil</a>
+            <a href="#about" class="block py-2 hover:text-amber-600 transition">À Propos</a>
+            <a href="#services" class="block py-2 hover:text-amber-600 transition">Services</a>
+            <a href="#watches" class="block py-2 hover:text-amber-600 transition">Montres</a>
+            <a href="#contact" class="block py-2 hover:text-amber-600 transition">Contact</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero min-h-screen flex items-center justify-center text-white pt-16">
+        <div class="container mx-auto px-6 text-center fade-in">
+            <h1 class="font-playfair text-4xl md:text-6xl font-bold mb-4">L'Art de l'Horlogerie</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">Expertise, précision et passion pour les montres de luxe depuis 1985</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-md font-medium transition">Demander un devis</a>
+                <a href="#watches" class="bg-transparent hover:bg-white hover:text-gray-800 border-2 border-white px-6 py-3 rounded-md font-medium transition">Voir nos montres</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <!-- About Text -->
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 fade-in slide-up">
+                    <h2 class="font-playfair text-3xl font-bold mb-6">Notre Expertise</h2>
+                    <p class="text-lg mb-6">Fondée en 1985, Horlogerie Prestige est devenue une référence dans la réparation et la vente de montres de luxe. Notre atelier parisien réunit des horlogers formés par les plus grandes manufactures suisses.</p>
+                    <p class="text-lg mb-8">Chaque montre qui nous est confiée bénéficie du même soin méticuleux, qu'il s'agisse d'une simple révision ou d'une restauration complexe. Notre engagement : redonner vie à votre pièce avec une précision absolue.</p>
+                    
+                    <!-- Stats -->
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-amber-600 mb-2">38</div>
+                            <div class="text-gray-600">Ans d'expérience</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-amber-600 mb-2">15K+</div>
+                            <div class="text-gray-600">Montres réparées</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-amber-600 mb-2">100%</div>
+                            <div class="text-gray-600">Pièces d'origine</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Certifications & Brands -->
+                <div class="md:w-1/2 fade-in slide-up">
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
+                        <h3 class="font-playfair text-xl font-bold mb-6 text-center">Nos Certifications</h3>
+                        <div class="flex flex-wrap justify-center gap-6 mb-10">
+                            <div class="text-center">
+                                <i class="fas fa-award text-4xl text-amber-600 mb-2"></i>
+                                <div>Certifié Rolex</div>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-medal text-4xl text-amber-600 mb-2"></i>
+                                <div>Certifié Omega</div>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-certificate text-4xl text-amber-600 mb-2"></i>
+                                <div>Certifié Patek Philippe</div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="font-playfair text-xl font-bold mb-6 text-center">Marques que nous servons</h3>
+                        <div class="grid grid-cols-3 md:grid-cols-4 gap-4">
+                            <div class="text-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Rolex_logo.svg/1200px-Rolex_logo.svg.png" alt="Rolex" class="h-10 mx-auto opacity-70 hover:opacity-100 transition">
+                            </div>
+                            <div class="text-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Omega_logo.svg/1200px-Omega_logo.svg.png" alt="Omega" class="h-10 mx-auto opacity-70 hover:opacity-100 transition">
+                            </div>
+                            <div class="text-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Cartier_logo.svg/1200px-Cartier_logo.svg.png" alt="Cartier" class="h-10 mx-auto opacity-70 hover:opacity-100 transition">
+                            </div>
+                            <div class="text-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patek_Philippe_logo.svg/1200px-Patek_Philippe_logo.svg.png" alt="Patek Philippe" class="h-10 mx-auto opacity-70 hover:opacity-100 transition">
+                            </div>
+                            <div class="text-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Audemars_Piguet_Logo.svg/1200px-Audemars_Piguet_Logo.svg.png" alt="Audemars Piguet" class="h-10 mx-auto opacity-70 hover:opacity-100 transition">
+                            </div>
+                            <div class="text-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Vacheron_Constantin_logo.svg/1200px-Vacheron_Constantin_logo.svg.png" alt="Vacheron Constantin" class="h-10 mx-auto opacity-70 hover:opacity-100 transition">
+                            </div>
+                            <div class="text-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/IWC_logo.svg/1200px-IWC_logo.svg.png" alt="IWC" class="h-10 mx-auto opacity-70 hover:opacity-100 transition">
+                            </div>
+                            <div class="text-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Jaeger-LeCoultre_Logo.svg/1200px-Jaeger-LeCoultre_Logo.svg.png" alt="Jaeger-LeCoultre" class="h-10 mx-auto opacity-70 hover:opacity-100 transition">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="font-playfair text-3xl font-bold mb-4">Nos Services</h2>
+                <p class="max-w-2xl mx-auto text-lg">Des solutions complètes pour vos montres, réalisées avec le plus grand soin par nos horlogers experts.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition fade-in slide-up">
+                    <div class="text-amber-600 text-4xl mb-4">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="font-playfair text-xl font-bold mb-3">Réparation & Entretien</h3>
+                    <p class="mb-4">Service complet incluant démontage, nettoyage, graissage et réglage de votre montre selon les standards des manufactures.</p>
+                    <a href="#contact" class="text-amber-600 font-medium hover:underline">En savoir plus →</a>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition fade-in slide-up">
+                    <div class="text-amber-600 text-4xl mb-4">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h3 class="font-playfair text-xl font-bold mb-3">Vente de Montres Neuves & d'Occasion</h3>
+                    <p class="mb-4">Collection soigneusement sélectionnée de montres neuves et d'occasion certifiées, toutes garanties authentiques.</p>
+                    <a href="#watches" class="text-amber-600 font-medium hover:underline">Voir la collection →</a>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition fade-in slide-up">
+                    <div class="text-amber-600 text-4xl mb-4">
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                    <h3 class="font-playfair text-xl font-bold mb-3">Remplacement de Piles</h3>
+                    <p class="mb-4">Utilisation exclusive de piles de qualité suisse avec contrôle d'étanchéité systématique pour préserver votre montre.</p>
+                    <a href="#contact" class="text-amber-600 font-medium hover:underline">Prendre rendez-vous →</a>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition fade-in slide-up">
+                    <div class="text-amber-600 text-4xl mb-4">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3 class="font-playfair text-xl font-bold mb-3">Restauration de Montres Anciennes</h3>
+                    <p class="mb-4">Expertise spécialisée dans la restauration de pièces vintage avec recherche de composants d'origine lorsque nécessaire.</p>
+                    <a href="#contact" class="text-amber-600 font-medium hover:underline">Consulter nos réalisations →</a>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition fade-in slide-up">
+                    <div class="text-amber-600 text-4xl mb-4">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3 class="font-playfair text-xl font-bold mb-3">Services par Correspondance</h3>
+                    <p class="mb-4">Envoi sécurisé de votre montre avec assurance et suivi, diagnostic gratuit avant toute intervention.</p>
+                    <a href="#contact" class="text-amber-600 font-medium hover:underline">Demander un kit d'envoi →</a>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition fade-in slide-up">
+                    <div class="text-amber-600 text-4xl mb-4">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="font-playfair text-xl font-bold mb-3">Expertise & Certification</h3>
+                    <p class="mb-4">Certificat d'authenticité détaillé avec historique et évaluation de la montre pour assurance ou revente.</p>
+                    <a href="#contact" class="text-amber-600 font-medium hover:underline">Programmer une expertise →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Before/After Slider -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="font-playfair text-3xl font-bold mb-4">Nos Réalisations</h2>
+                <p class="max-w-2xl mx-auto text-lg">Découvrez le travail minutieux de nos horlogers à travers ces restaurations.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto fade-in slide-up">
+                <div class="ba-slider">
+                    <img src="https://images.unsplash.com/photo-1524592091514-55d78423c5f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1376&q=80" alt="Before restoration">
+                    <div class="resize">
+                        <img src="https://images.unsplash.com/photo-1523170335258-f5ed118494a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" alt="After restoration">
+                    </div>
+                    <span class="handle"></span>
+                </div>
+                <div class="flex justify-between mt-2 text-sm text-gray-600">
+                    <span>Avant restauration</span>
+                    <span>Après restauration</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Watches -->
+    <section id="watches" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="font-playfair text-3xl font-bold mb-4">Nos Montres Sélectionnées</h2>
+                <p class="max-w-2xl mx-auto text-lg">Découvrez notre sélection de pièces exceptionnelles, neuves et d'occasion certifiées.</p>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Watch 1 -->
+                <div class="watch-card bg-white rounded-lg overflow-hidden shadow-sm fade-in slide-up">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1542496658-e33a6d0d50b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Rolex Submariner" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-medium">Nouveau</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-playfair text-xl font-bold mb-2">Rolex Submariner Date</h3>
+                        <p class="text-gray-600 mb-4">Référence 126610LN - Boîtier 41mm en acier</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">9 800 €</span>
+                            <a href="#" class="text-amber-600 hover:underline font-medium">Voir le produit →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Watch 2 -->
+                <div class="watch-card bg-white rounded-lg overflow-hidden shadow-sm fade-in slide-up">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1524592714635-d77511a4814a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Omega Speedmaster" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-medium">Occasion</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-playfair text-xl font-bold mb-2">Omega Speedmaster Moonwatch</h3>
+                        <p class="text-gray-600 mb-4">Édition 50e anniversaire Apollo 11 - Or 18K</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">24 500 €</span>
+                            <a href="#" class="text-amber-600 hover:underline font-medium">Voir le produit →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Watch 3 -->
+                <div class="watch-card bg-white rounded-lg overflow-hidden shadow-sm fade-in slide-up">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Patek Philippe" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-medium">Exclusivité</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-playfair text-xl font-bold mb-2">Patek Philippe Calatrava</h3>
+                        <p class="text-gray-600 mb-4">Référence 5196G - Boîtier 37mm en or blanc</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">18 200 €</span>
+                            <a href="#" class="text-amber-600 hover:underline font-medium">Voir le produit →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Watch 4 -->
+                <div class="watch-card bg-white rounded-lg overflow-hidden shadow-sm fade-in slide-up">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1554342872-034a06541bad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Cartier Tank" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-medium">Vintage</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-playfair text-xl font-bold mb-2">Cartier Tank Louis</h3>
+                        <p class="text-gray-600 mb-4">Modèle 1987 - Boîtier 23x30mm en or jaune</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">6 900 €</span>
+                            <a href="#" class="text-amber-600 hover:underline font-medium">Voir le produit →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Watch 5 -->
+                <div class="watch-card bg-white rounded-lg overflow-hidden shadow-sm fade-in slide-up">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1526045431048-f857369baa09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Audemars Piguet" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-medium">Nouveau</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-playfair text-xl font-bold mb-2">Audemars Piguet Royal Oak</h3>
+                        <p class="text-gray-600 mb-4">Référence 15500ST - Boîtier 41mm en acier</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">22 500 €</span>
+                            <a href="#" class="text-amber-600 hover:underline font-medium">Voir le produit →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Watch 6 -->
+                <div class="watch-card bg-white rounded-lg overflow-hidden shadow-sm fade-in slide-up">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1523170335258-f5ed118494a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" alt="Jaeger-LeCoultre" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-medium">Occasion</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-playfair text-xl font-bold mb-2">Jaeger-LeCoultre Reverso</h3>
+                        <p class="text-gray-600 mb-4">Grande Taille - Boîtier 28x46mm en acier</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">5 900 €</span>
+                            <a href="#" class="text-amber-600 hover:underline font-medium">Voir le produit →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 fade-in">
+                <a href="#" class="inline-block bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-md font-medium transition">Voir toute la collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="font-playfair text-3xl font-bold mb-4">Témoignages</h2>
+                <p class="max-w-2xl mx-auto text-lg">Ce que nos clients disent de notre travail.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 p-8 rounded-lg fade-in slide-up">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-amber-400"></i>
+                        <i class="fas fa-star text-amber-400"></i>
+                        <i class="fas fa-star text-amber-400"></i>
+                        <i class="fas fa-star text-amber-400"></i>
+                        <i class="fas fa-star text-amber-400"></i>
+                    </div>
+                    <p class="italic mb-6">"Le service de restauration de ma Rolex Datejust des années 70 a été exceptionnel. La montre est comme neuve, avec un fonctionnement parfait. Communication excellente tout au long du processus."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Jean D." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <div class="font-bold">Jean D.</div>
+                            <div class="text-sm text-gray-600">Paris</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 p-8 rounded-lg fade-in slide-up">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-amber-400"></i>
+                        <i class="fas fa-star text-amber-400"></i>
+                        <i class="fas fa-star text-amber-400"></i>
+                        <i class="fas fa-star text-amber-400"></i>
+                        <i class="fas fa-star text-amber-400"></i>
+                    </div>
+                    <p class="italic mb-6">"J'ai acheté une Omega Speedmaster d'occasion certifiée par leurs soins. La montre était dans un état bien supérieur à la description. Emballage soigné et livraison sécurisée. Je recommande vivement."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sophie L." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <div class="font-bold">Sophie L.</div>
+                            <div class="text-sm text-gray-600">Lyon</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 p-8 rounded-lg fade-in slide-up">
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-amber-400"></i>
+                        <i class="fas fa-star text-amber-400"></i>
+                        <i class="fas fa-star text-amber-400"></i>
+                        <i class="fas fa-star text-amber-400"></i>
+                        <i class="fas fa-star text-amber-400"></i>
+                    </div>
+                    <p class="italic mb-6">"Service par correspondance impeccable pour la révision annuelle de ma Patek Philippe. Diagnostic détaillé avec photos avant intervention. Délai respecté malgré la complexité du mouvement."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Pierre M." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <div class="font-bold">Pierre M.</div>
+                            <div class="text-sm text-gray-600">Bordeaux</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="font-playfair text-3xl font-bold mb-4">Questions Fréquentes</h2>
+                <p class="max-w-2xl mx-auto text-lg">Trouvez des réponses aux questions les plus courantes sur nos services.</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- FAQ Item 1 -->
+                <div class="mb-4 border-b border-gray-200 pb-4 fade-in slide-up">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+                        <h3 class="font-medium text-lg">Quel est le délai moyen pour une révision complète ?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content mt-2">
+                        <p class="text-gray-600">Le délai standard est de 2 à 3 semaines selon la complexité du mouvement et la disponibilité des pièces détachées. Pour les montres anciennes nécessitant des pièces spécifiques, le délai peut être prolongé à 4-6 semaines. Nous vous informons systématiquement avant toute intervention.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="mb-4 border-b border-gray-200 pb-4 fade-in slide-up">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+                        <h3 class="font-medium text-lg">Proposez-vous une garantie sur vos réparations ?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content mt-2">
+                        <p class="text-gray-600">Toutes nos interventions bénéficient d'une garantie de 24 mois, couvrant à la fois les défauts de fabrication et les problèmes liés à la réparation. Cette garantie ne couvre pas les dommages accidentels ou une usure normale. Pour les montres achetées chez nous, la garantie est de 5 ans sur les montres neuves et 2 ans sur les montres d'occasion.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="mb-4 border-b border-gray-200 pb-4 fade-in slide-up">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+                        <h3 class="font-medium text-lg">Comment envoyer ma montre en toute sécurité ?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content mt-2">
+                        <p class="text-gray-600">Nous fournissons un kit d'expédition sécurisé comprenant un étui de protection rembourré et une enveloppe prépayée. Il est recommandé d'envoyer la montre sans bracelet pour réduire le volume. L'envoi est assuré jusqu'à 50 000 €. Pour les montres de valeur supérieure, nous recommandons un transport spécialisé que nous pouvons organiser pour vous.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="mb-4 border-b border-gray-200 pb-4 fade-in slide-up">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+                        <h3 class="font-medium text-lg">Quelle est votre politique de confidentialité ?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content mt-2">
+                        <p class="text-gray-600">La discrétion est essentielle dans notre métier. Nous ne divulguons jamais les informations concernant nos clients ou les montres que nous traitons. Les montres sont stockées dans un coffre-fort certifié et assuré. Vous pouvez demander à tout moment la destruction des données personnelles après la fin de la garantie.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="mb-4 border-b border-gray-200 pb-4 fade-in slide-up">
+                    <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+                        <h3 class="font-medium text-lg">Pouvez-vous obtenir des pièces détachées pour toutes les marques ?</h3>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content mt-2">
+                        <p class="text-gray-600">En tant qu'atelier certifié par plusieurs manufactures, nous avons accès aux pièces d'origine pour les marques Rolex, Omega, Patek Philippe, Cartier et Jaeger-LeCoultre. Pour les autres marques, nous utilisons des composants de qualité équivalente lorsque les pièces d'origine ne sont pas disponibles. Dans tous les cas, nous vous informons et obtenons votre accord avant toute substitution.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="font-playfair text-3xl font-bold mb-4">Contactez-nous</h2>
+                <p class="max-w-2xl mx-auto text-lg">Notre équipe est à votre disposition pour répondre à toutes vos questions.</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <!-- Contact Form -->
+                <div class="lg:w-1/2 fade-in slide-up">
+                    <form class="bg-gray-50 p-8 rounded-lg shadow-sm">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Nom complet</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        <div class="mb-6">
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">Téléphone</label>
+                            <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        <div class="mb-6">
+                            <label for="service" class="block text-gray-700 font-medium mb-2">Service concerné</label>
+                            <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500">
+                                <option value="">Sélectionnez un service</option>
+                                <option value="repair">Réparation & Entretien</option>
+                                <option value="sale">Achat de montre</option>
+                                <option value="battery">Remplacement de pile</option>
+                                <option value="restoration">Restauration</option>
+                                <option value="expertise">Expertise</option>
+                                <option value="other">Autre demande</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-md font-medium transition">Envoyer le message</button>
+                    </form>
+                </div>
+                
+                <!-- Contact Info & Map -->
+                <div class="lg:w-1/2 fade-in slide-up">
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-sm h-full">
+                        <h3 class="font-playfair text-xl font-bold mb-6">Informations de contact</h3>
+                        
+                        <!-- Contact Details -->
+                        <div class="space-y-6 mb-8">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-amber-600 mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-medium">Adresse</h4>
+                                    <p class="text-gray-600">12 Rue de la Paix, 75002 Paris</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-phone-alt text-amber-600 mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-medium">Téléphone</h4>
+                                    <p class="text-gray-600">+33 1 42 61 53 42</p>
+                                    <a href="https://wa.me/33142615342" class="text-amber-600 hover:underline flex items-center mt-1">
+                                        <i class="fab fa-whatsapp mr-2"></i> Écrivez-nous sur WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-envelope text-amber-600 mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-medium">Email</h4>
+                                    <p class="text-gray-600">contact@horlogerieprestige.fr</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-clock text-amber-600 mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-medium">Horaires d'ouverture</h4>
+                                    <p class="text-gray-600">Lundi - Vendredi: 10h - 18h</p>
+                                    <p class="text-gray-600">Samedi: 10h - 14h</p>
+                                    <p class="text-gray-600">Dimanche: Fermé</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Map -->
+                        <div class="overflow-hidden rounded-lg shadow-sm">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.991440608209!2d2.292292615674389!3d48.85837360866186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1623259657291!5m2!1sfr!2sfr" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        
+                        <!-- Emergency Contact -->
+                        <div class="mt-6 bg-amber-50 border-l-4 border-amber-600 p-4">
+                            <h4 class="font-bold text-amber-800 mb-2">Service d'urgence</h4>
+                            <p class="text-amber-700 text-sm">Pour les réparations urgentes en dehors des heures d'ouverture, contactez le <span class="font-bold">+33 6 12 34 56 78</span> (supplément de 50€ applicable).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 bg-gray-900 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <div class="max-w-2xl mx-auto fade-in">
+                <h2 class="font-playfair text-3xl font-bold mb-4">Restez informé</h2>
+                <p class="mb-8">Abonnez-vous à notre newsletter pour recevoir nos dernières acquisitions, conseils d'entretien et offres exclusives.</p>
+                
+                <form class="flex flex-col sm:flex-row gap-2 max-w-lg mx-auto">
+                    <input type="email" placeholder="Votre email" class="flex-grow px-4 py-3 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    <button type="submit" class="bg-amber-600 hover:bg-amber-700 px-6 py-3 rounded-md font-medium transition">S'abonner</button>
+                </form>
+                
+                <p class="text-sm text-gray-400 mt-4">Nous ne partagerons jamais votre email. Désabonnez-vous à tout moment.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Logo & About -->
+                <div class="md:col-span-1">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-clock text-2xl text-amber-600 mr-2"></i>
+                        <span class="font-playfair text-xl font-bold text-white">HORLOGERIE PRESTIGE</span>
+                    </div>
+                    <p class="mb-4">Experts en horlogerie de luxe depuis 1985. Service, passion et excellence.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-white font-medium mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="hover:text-white transition">Accueil</a></li>
+                        <li><a href="#about" class="hover:text-white transition">À Propos</a></li>
+                        <li><a href="#services" class="hover:text-white transition">Services</a></li>
+                        <li><a href="#watches" class="hover:text-white transition">Montres</a></li>
+                        <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-white font-medium mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Réparation & Entretien</a></li>
+                        <li><a href="#" class="hover:text-white transition">Vente de Montres</a></li>
+                        <li><a href="#" class="hover:text-white transition">Remplacement de Piles</a></li>
+                        <li><a href="#" class="hover:text-white transition">Restauration</a></li>
+                        <li><a href="#" class="hover:text-white transition">Expertise</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Legal -->
+                <div>
+                    <h3 class="text-white font-medium mb-4">Informations légales</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Mentions légales</a></li>
+                        <li><a href="#" class="hover:text-white transition">Politique de confidentialité</a></li>
+                        <li><a href="#" class="hover:text-white transition">Conditions générales</a></li>
+                        <li><a href="#" class="hover:text-white transition">Garanties</a></li>
+                        <li><a href="#" class="hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-sm">
+                <p>&copy; 2023 Horlogerie Prestige. Tous droits réservés.</p>
+                <p class="mt-2">Site conçu avec passion pour les amateurs de belles mécaniques.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-amber-600 text-white w-12 h-12 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 flex items-center justify-center">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // FAQ Accordion
+        const faqToggles = document.querySelectorAll('.faq-toggle');
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                // Toggle content
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.classList.remove('transform', 'rotate-180');
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.classList.add('transform', 'rotate-180');
+                }
+            });
+        });
+
+        // Before/After Slider
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.querySelector('.ba-slider');
+            if (slider) {
+                const before = slider.querySelector('.resize');
+                const handle = slider.querySelector('.handle');
+                let isDragging = false;
+
+                handle.addEventListener('mousedown', function(e) {
+                    isDragging = true;
+                    document.body.style.cursor = 'ew-resize';
+                    e.preventDefault();
+                });
+
+                document.addEventListener('mousemove', function(e) {
+                    if (!isDragging) return;
+                    
+                    const sliderRect = slider.getBoundingClientRect();
+                    let newWidth = (e.clientX - sliderRect.left) / sliderRect.width * 100;
+                    
+                    // Constrain between 0 and 100
+                    newWidth = Math.max(0, Math.min(newWidth, 100));
+                    
+                    before.style.width = newWidth + '%';
+                    handle.style.left = newWidth + '%';
+                });
+
+                document.addEventListener('mouseup', function() {
+                    isDragging = false;
+                    document.body.style.cursor = '';
+                });
+            }
+        });
+
+        // Scroll Animations
+        function checkScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // Initial check
+        document.addEventListener('DOMContentLoaded', checkScroll);
+        // Check on scroll
+        window.addEventListener('scroll', checkScroll);
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
